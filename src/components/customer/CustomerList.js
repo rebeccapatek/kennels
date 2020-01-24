@@ -1,0 +1,17 @@
+import React, { useContext } from "react"
+import { CustomerContext } from "./CustomerProvider"
+import Customer from "./Customer"
+import "./Customer.css"
+
+export default () => {
+    const { customers } = useContext(CustomerContext)
+    console.log(customers)
+
+    return (
+        <div className="customers">
+        {
+            customers.map(cust => <Customer key={cust.id} customer={cust} />)
+        }
+        </div>
+    )
+}
