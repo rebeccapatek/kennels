@@ -17,7 +17,7 @@ export const EmployeeProvider = (props) => {
             .then(res => res.json())
             .then(setEmployees)
     }
-
+//Post the object to your API and change the API state
     const addEmployee = employee => {
         return fetch("http://localhost:8088/employees", {
             method: "POST",

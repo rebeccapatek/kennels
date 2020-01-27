@@ -1,10 +1,10 @@
 import React from "react"
 import "./Employee.css"
 
-export default ({ employee }) => (
+export default ({ employee, location }) => (
     <section className="employee">
         <h3 className="employee__name">{employee.name}</h3>
-        <div className="employee__location">{employee.location}</div>
+        <div className="employee__location">{location.name}</div>
     </section>
 )
 
