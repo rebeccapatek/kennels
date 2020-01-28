@@ -9,6 +9,9 @@ import CustomerList from "./customer/CustomerList"
 import { EmployeeProvider } from "./employee/EmployeeProvider"
 import EmployeeList from "./employee/EmployeeList"
 import EmployeeForm from "./employee/EmployeeForm"
+import AnimalForm from "./animal/AnimalForm"
+import AnimalDetails from "./animal/AnimalDetails"
+import LocationDetails from  "./location/LocationDetails"
 
 
 export default (props) => {
@@ -16,17 +19,32 @@ export default (props) => {
         <>
             <LocationProvider>
                 {/* Render the location list when http://localhost:3000/ */}
-                <Route exact path="/">
-                    <LocationList />
-                </Route>
+                <AnimalProvider>
+                    <EmployeeProvider>
+                        <CustomerProvider>
+                            <Route exact path="/">
+                                <LocationList />
+                            </Route>
+                            <Route exact path="/:locationId(\d+)" render={
+                            props => <LocationDetails {...props} />
+                            } />
+                        </CustomerProvider>
+                    </EmployeeProvider>
+                </AnimalProvider>
             </LocationProvider>
 
             <AnimalProvider>
                 <LocationProvider>
                     <CustomerProvider>
-                        <Route exact path="/animals">
-                            <AnimalList />
-                        </Route>
+                        <Route exact path="/animals" render={
+                            props => <AnimalList {...props} />
+                        } />
+                        <Route exact path="/animals/create" render={
+                        props => <AnimalForm {...props} />
+                        } />
+                            <Route path="/animals/:animalId(\d+)" render={
+                        props => <AnimalDetails {...props} />
+                        } />
                     </CustomerProvider>
                 </LocationProvider>
             </AnimalProvider>
@@ -46,6 +64,7 @@ export default (props) => {
                     <Route path="/employees/create" render={
                     props => <EmployeeForm {...props} />
                 } />
+                
                  </LocationProvider>
             </EmployeeProvider>
         </>
